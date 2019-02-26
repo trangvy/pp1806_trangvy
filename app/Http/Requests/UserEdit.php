@@ -23,9 +23,10 @@ class UserEdit extends FormRequest
      */
     public function rules()
     {
+        $userId = $this->route('id');
         return [
             'name' => ['nullable','max:30', new AlphaSpaces],
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email,' . $userId,
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6'
         ];
